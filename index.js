@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
+const rotas = require("./src/routes/index.routes");
+const logger = require('./src/middlewares/logger.middleware');
 
 app.use(express.json());
 
+rotas.use(logger)
+
 // Registro das Rotas
-app.use('/usuarios', require('./src/routes/usuarios.routes'));
-app.use('/livros', require('./src/routes/livros.routes'));
+app.use(rotas);
 
 const PORT = 3000;
 

@@ -30,4 +30,16 @@ const buscarLivroPorID = async id => {
     return livro || null;
 };
 
-module.exports = {listaTodosLivros, buscarLivroPorID};
+// Criar um novo livro
+const criarLivro = async (titulo, autor) => {
+    const novoLivro = {
+        id: acervo.length > 0 ? Math.max(...acervo.map(item => item.id)) + 1 : 1,
+        titulo,
+        autor,
+        disponivel: true,
+    };
+    acervo.push(novoLivro);
+    return novoLivro;
+};
+
+module.exports = {listaTodosLivros, buscarLivroPorID, criarLivro};

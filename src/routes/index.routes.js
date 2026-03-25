@@ -6,9 +6,9 @@ const usuariosRoutes = require('./usuarios.routes');
 const { logger } = require('../middlewares/main.middlewares')
 
 // 1. Rotas de recursos (Coloque SEMPRE antes do 404)
+router.use(logger);
 router.use('/usuarios', usuariosRoutes);
 router.use('/livros', livrosRoutes);
-router.use(logger);
 
 // 2. Rota raiz
 router.get('/', (req, res) => {
@@ -20,4 +20,4 @@ router.use((req, res) => {
     res.status(404).json({erro: 'Rota não encontrada'});
 });
 
-module.exports = router;
+module.exports = router, { logger };
