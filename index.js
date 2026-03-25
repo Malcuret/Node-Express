@@ -1,20 +1,11 @@
 const express = require('express');
-
-const livrosRoutes = require ('./src/routes/livros.routes');
-
 const app = express();
 
 app.use(express.json());
 
 // Registro das Rotas
-app.use('/livros', livrosRoutes);
-
-app.use('/', (req, res) => {
-    res.json({
-        sistema:'Biblioteca M4',
-        status: 'Online'
-    });
-});
+app.use('/usuarios', require('./src/routes/usuarios.routes'));
+app.use('/livros', require('./src/routes/livros.routes'));
 
 const PORT = 3000;
 

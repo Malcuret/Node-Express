@@ -10,4 +10,13 @@ const listarLivros = async (req, res) => {
     }
 };
 
-module.exports = {listarLivros};
+const buscarLivrosPorID = async (req, res) => {
+    try{
+        const livros = await livrosService.buscarLivrosPorID(req.params.id);
+        res.status(200).json({total: livros.length, livros});
+    } catch (error){
+        res.status(500).json({erro: 'Erro interno ao buscar o livro'})
+    }
+}
+
+module.exports = {listarLivros, buscarLivrosPorID};

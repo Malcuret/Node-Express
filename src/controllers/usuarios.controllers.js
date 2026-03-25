@@ -30,4 +30,23 @@ const buscarUsuarioPorID = async (req, res) => {
     }
 };
 
-module.exports = {listarUsuarios, buscarUsuarioPorID};
+// Post /usuarios
+const criarUsuario = async (req, res) => {
+    try {
+        // Extrai os dados do corpo da requisição - essa é a responsabilidade do controller, o service não tem acesso a req e res
+        const {nome, email} = req.body;
+        const novoUsuario = await usuariosService.CriarUsuario(nome, email);
+
+        // 201 = Created - Status correto para indicar que um recurso foi criado com sucesso
+        res.status(201).json({
+            mensagem: 'Usuario criado com sucesso',
+            usuario: novoUsuario,
+        })
+    } catch
+     (error) {
+        // Se o service lançou um erro de validação, retornamos um 400 Bad Request com a mensagem de erro
+        res.status(400).json({erro: error.message});
+     }
+}
+
+module.exports = {listarUsuarios, buscarUsuarioPorID, criarUsuario};
