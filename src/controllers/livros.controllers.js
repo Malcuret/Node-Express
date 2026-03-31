@@ -10,6 +10,8 @@ const listarLivros = async (req, res) => {
     }
 };
 
+
+
 const buscarLivrosPorID = async (req, res) => {
     try{
         const livros = await livrosService.buscarLivroPorID(req.params.id);
@@ -17,11 +19,14 @@ const buscarLivrosPorID = async (req, res) => {
     } catch (error){
         res.status(500).json({erro: 'Erro interno ao buscar o livro'})
     }
-}
+};
+
+
 
 const criarLivro = async (req, res) => {
     try {
         // Extrai os dados do corpo da requisição - essa é a responsabilidade do controller, o service não tem acesso a req e res
+
         const {titulo, autor} = req.body;
         const novoLivro = await livrosService.criarLivro(titulo, autor);
 

@@ -3,12 +3,13 @@ const express = require('express');
 const router = express.Router();
 const livrosRoutes = require('./livros.routes');
 const usuariosRoutes = require('./usuarios.routes');
-const { logger } = require('../middlewares/main.middlewares')
+const {autenticar} = require('../middlewares/auth.middleware')
+
+router.use(autenticar);
 
 // 1. Rotas de recursos (Coloque SEMPRE antes do 404)
-router.use(logger);
-router.use('/usuarios', usuariosRoutes);
 router.use('/livros', livrosRoutes);
+router.use('/usuarios', usuariosRoutes);
 
 // 2. Rota raiz
 router.get('/', (req, res) => {
@@ -20,4 +21,4 @@ router.use((req, res) => {
     res.status(404).json({erro: 'Rota não encontrada'});
 });
 
-module.exports = router, { logger };
+module.exports = router;
